@@ -1,15 +1,21 @@
+import 'package:car_event_organizer/domain/usecases/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 import 'package:car_event_organizer/base/constant.dart';
 
 class CreatePinPage extends StatefulWidget {
-  const CreatePinPage({Key? key}) : super(key: key);
+  const CreatePinPage({Key? key, required this.no, required this.name}) : super(key: key);
+
+  final String no;
+  final String name;
 
   @override
   State<CreatePinPage> createState() => _CreatePinPageState();
 }
 
 class _CreatePinPageState extends State<CreatePinPage> {
+  final auth = AuthenticationImpl();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +56,7 @@ class _CreatePinPageState extends State<CreatePinPage> {
                 fontWeight: FontWeight.bold,
               ),
               onComplete: (output) {
-                print(output);
+                auth.registering(widget.no, widget.name, output, context);
               },
             ),
           ],

@@ -1,11 +1,16 @@
+import 'package:bcrypt/bcrypt.dart';
 import 'package:car_event_organizer/base/constant.dart';
+import 'package:car_event_organizer/domain/usecases/order.dart';
 import 'package:car_event_organizer/pages/main-pages/failed-page.dart';
 import 'package:car_event_organizer/pages/main-pages/success-page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SecurityPage extends StatefulWidget {
-  const SecurityPage({Key? key}) : super(key: key);
+  const SecurityPage({Key? key, required this.id}) : super(key: key);
+
+  final String id;
 
   @override
   State<SecurityPage> createState() => _SecurityPageState();
@@ -14,6 +19,22 @@ class SecurityPage extends StatefulWidget {
 class _SecurityPageState extends State<SecurityPage> {
   final controller = TextEditingController();
   final focusNode = FocusNode();
+  bool checkPIN = false;
+
+  final order = OrderingImpl();
+  late SharedPreferences prefs;
+  String? _pin;
+
+  Future<void> setPIN() async {
+    prefs = await SharedPreferences.getInstance();
+    _pin = prefs.getString('pin') ?? '';
+  }
+
+  @override
+  void initState() {
+    setPIN();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -63,8 +84,9 @@ class _SecurityPageState extends State<SecurityPage> {
               ),
               onComplete: (output) {
                 print(output);
-                if (output == '5587') {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) => const SuccessPage()), (route) => false);
+                checkPIN = BCrypt.checkpw(output, _pin!);
+                if (checkPIN) {
+                  order.orderTicket(widget.id, context);
                 } else {
                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) => const FailedPage()), (route) => false);
                 }

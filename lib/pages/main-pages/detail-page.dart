@@ -1,9 +1,21 @@
 import 'package:car_event_organizer/base/constant.dart';
 import 'package:car_event_organizer/pages/main-pages/home-page.dart';
+import 'package:car_event_organizer/pages/main-pages/security-page.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  const DetailPage({Key? key, required this.title, required this.year, required this.tanggal, required this.location, required this.country, required this.description, required this.event_schedule, required this.price, required this.jumlah_tiket, required this.id}) : super(key: key);
+
+  final String id;
+  final String title;
+  final String year;
+  final String tanggal;
+  final String location;
+  final String country;
+  final String description;
+  final String event_schedule;
+  final String price;
+  final String jumlah_tiket;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -84,18 +96,18 @@ class _DetailPageState extends State<DetailPage> {
                             width: 240,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 Text(
-                                  'Jakchap Fest',
-                                  style: TextStyle(
+                                  widget.title,
+                                  style: const TextStyle(
                                     color: Color(0xFFF9FFFF),
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 Text(
-                                  '2023',
-                                  style: TextStyle(
+                                  widget.year,
+                                  style: const TextStyle(
                                     color: Color(0xFFF9FFFF),
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
@@ -115,12 +127,12 @@ class _DetailPageState extends State<DetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              children: const [
-                                Icon(Icons.access_time_outlined, size: 22, color: Color(0xFF627E7F)),
-                                SizedBox(width: 7),
+                              children: [
+                                const Icon(Icons.access_time_outlined, size: 22, color: Color(0xFF627E7F)),
+                                const SizedBox(width: 7),
                                 Text(
-                                  '1 - 3 January (3 days)',
-                                  style: TextStyle(
+                                  widget.tanggal,
+                                  style: const TextStyle(
                                     color: Color(0xFF627E7F),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
@@ -130,12 +142,12 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                             const SizedBox(height: 12),
                             Row(
-                              children: const [
-                                Icon(Icons.location_on_outlined, size: 22, color: Color(0xFF627E7F)),
-                                SizedBox(width: 7),
+                              children: [
+                                const Icon(Icons.location_on_outlined, size: 22, color: Color(0xFF627E7F)),
+                                const SizedBox(width: 7),
                                 Text(
-                                  'Balishira Resort, Sreemangal,',
-                                  style: TextStyle(
+                                  widget.location,
+                                  style: const TextStyle(
                                     color: Color(0xFF627E7F),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
@@ -143,11 +155,11 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                               ],
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 28.7),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 28.7),
                               child: Text(
-                                'Bangladesh',
-                                style: TextStyle(
+                                widget.country,
+                                style: const TextStyle(
                                   color: Color(0xFF627E7F),
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
@@ -167,8 +179,8 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Description',
                             style: TextStyle(
                               color: Color(0xFFF9FFFF),
@@ -176,11 +188,11 @@ class _DetailPageState extends State<DetailPage> {
                               fontSize: 24,
                             ),
                           ),
-                          SizedBox(height: 17),
+                          const SizedBox(height: 17),
                           Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            widget.description,
                             softWrap: true,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF627E7F),
                               fontSize: 15,
                               fontWeight: FontWeight.w400,
@@ -198,8 +210,8 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Event Schedule',
                             style: TextStyle(
                               color: Color(0xFFF9FFFF),
@@ -207,25 +219,25 @@ class _DetailPageState extends State<DetailPage> {
                               fontSize: 24,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
-                            '10:00 (January 1)',
-                            style: TextStyle(
+                            widget.event_schedule,
+                            style: const TextStyle(
                               color: Color(0xFFF9FFFF),
                               fontWeight: FontWeight.w300,
                               fontSize: 15,
                             ),
                           ),
-                          SizedBox(height: 15),
-                          Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pharetra libero eu enim laoreet blandit. Vivamus congue leo ipsum, ut mattis diam fermentum eget. Nunc tortor neque, dignissim nec viverra vel, auctor ac velit. In id mauris ornare, sagittis urna ac, condimentum augue. Donec augue ipsum, porta vel ultricies et, mattis in quam. Nullam dui eros, facilisis at dolor dictum, vehicula laoreet quam. Proin vulputate est non sollicitudin facilisis. Integer nec maximus erat.',
-                            softWrap: true,
-                            style: TextStyle(
-                              color: Color(0xFF627E7F),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
+                          const SizedBox(height: 15),
+                          // Text(
+                          //   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pharetra libero eu enim laoreet blandit. Vivamus congue leo ipsum, ut mattis diam fermentum eget. Nunc tortor neque, dignissim nec viverra vel, auctor ac velit. In id mauris ornare, sagittis urna ac, condimentum augue. Donec augue ipsum, porta vel ultricies et, mattis in quam. Nullam dui eros, facilisis at dolor dictum, vehicula laoreet quam. Proin vulputate est non sollicitudin facilisis. Integer nec maximus erat.',
+                          //   softWrap: true,
+                          //   style: TextStyle(
+                          //     color: Color(0xFF627E7F),
+                          //     fontSize: 15,
+                          //     fontWeight: FontWeight.w400,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],
@@ -251,16 +263,16 @@ class _DetailPageState extends State<DetailPage> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
-                        '\$50.00',
-                        style: TextStyle(
+                        '\$${widget.price}',
+                        style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                             fontSize: 27
                         ),
                       ),
-                      Text(
+                      const Text(
                         '/per person',
                         style: TextStyle(
                             color: Color(0xFFC4C9C7),
@@ -286,17 +298,17 @@ class _DetailPageState extends State<DetailPage> {
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
-                            '40',
-                            style: TextStyle(
+                            widget.jumlah_tiket,
+                            style: const TextStyle(
                               color: Color(0xFF274C4C),
                               fontWeight: FontWeight.w700,
                               fontSize: 13.4,
                             ),
                           ),
-                          Text(
-                            '/400 tickets available',
+                          const Text(
+                            '/100 tickets available',
                             style: TextStyle(
                               color: Color(0xFF9DABAB),
                               fontWeight: FontWeight.w400,
@@ -309,7 +321,9 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   const SizedBox(height: 20),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) => SecurityPage(id: widget.id)), (route) => false);
+                    },
                     child: Container(
                       width: double.infinity,
                       height: 50,

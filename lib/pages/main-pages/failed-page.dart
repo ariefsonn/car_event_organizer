@@ -44,7 +44,7 @@ class _FailedPageState extends State<FailedPage> {
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) => const SecurityPage()), (route) => false);
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) => const HomePage()), (route) => false);
                 },
                 child: Container(
                     width: 105,

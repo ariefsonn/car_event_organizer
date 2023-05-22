@@ -1,4 +1,5 @@
 import 'package:car_event_organizer/base/constant.dart';
+import 'package:car_event_organizer/pages/auth-pages/create-pin.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -9,6 +10,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final name = TextEditingController();
+  final no = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +45,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               padding: const EdgeInsets.only(left: 10),
-              child: const TextField(
-                style: TextStyle(
+              child: TextField(
+                controller: name,
+                style: const TextStyle(
                   color: Colors.white,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Enter your name',
                   hintStyle: TextStyle(fontSize: 14, color: Color(0xFF4F7777)),
@@ -61,15 +66,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               padding: const EdgeInsets.only(left: 10),
-              child: const TextField(
-                style: TextStyle(
+              child: TextField(
+                controller: no,
+                style: const TextStyle(
                   color: Colors.white,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Enter your username',
+                  hintText: 'Enter your phone number',
                   hintStyle: TextStyle(fontSize: 14, color: Color(0xFF4F7777)),
                 ),
+                keyboardType: TextInputType.number,
               ),
             ),
             const SizedBox(height: 7),
@@ -138,7 +145,9 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             const SizedBox(height: 13),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (ctx) => CreatePinPage(no: no.text, name: name.text)));
+              },
               child: Container(
                   width: double.infinity,
                   height: 50,

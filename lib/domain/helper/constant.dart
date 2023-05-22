@@ -1,3 +1,3 @@
 class Helper {
-  static const api = '';
+  static const api = 'api.artqtion.com';
 }

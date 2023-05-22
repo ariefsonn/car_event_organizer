@@ -1,4 +1,6 @@
 import 'package:car_event_organizer/base/constant.dart';
+import 'package:car_event_organizer/domain/usecases/authentication.dart';
+import 'package:car_event_organizer/pages/auth-pages/register-page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,6 +11,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final phone = TextEditingController();
+  final auth = AuthenticationImpl();
+
+  @override
+  void initState() {
+    auth.checkLogin(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +52,12 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               padding: const EdgeInsets.only(left: 10),
-              child: const TextField(
-                style: TextStyle(
+              child: TextField(
+                controller: phone,
+                style: const TextStyle(
                   color: Colors.white,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Username',
                   hintStyle: TextStyle(fontSize: 14, color: Color(0xFF4F7777)),
@@ -55,7 +67,9 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 13),
             GestureDetector(
               onTap: () {
-
+                setState(() {
+                  auth.login(phone.text, context);
+                });
               },
               child: Container(
                   width: double.infinity,
@@ -74,6 +88,24 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   )
+              ),
+            ),
+            const SizedBox(height: 20),
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (c) => const RegisterPage()), (route) => false);
+                  });
+                },
+                child: const Text(
+                  "Haven't registered yet? Register now!",
+                  style: TextStyle(
+                    color: Color(0xFF627E7F),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ),
           ],
